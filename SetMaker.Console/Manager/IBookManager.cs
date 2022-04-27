@@ -10,7 +10,7 @@ namespace SetMaker.Console.Manager
     public interface IBookManager
     {
         bool SaveBook(Book book);
-        Book GetBook(string id);
+        Book? GetBook(string id);
         bool ReadBookfromfolder(string folder);
     }
 }

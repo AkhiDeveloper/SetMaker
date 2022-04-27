@@ -19,50 +19,56 @@ namespace SetMaker.Console.Manager
                 Directory.CreateDirectory(_directory);
             }
         }
-        public Book GetBook(string id)
+        public Book? GetBook(string id)
         {
-            throw new NotImplementedException();
-            //try
-            //{
-            //    string[] files = Directory.GetFiles(_directory);
-            //    foreach (string file in files)
-            //    {
-            //        string filedata = File.ReadAllText(file);
-            //        if (String.IsNullOrEmpty(filedata))
-            //        {
-            //            var filename = Path.GetFileName(file);
-            //            System.Console.WriteLine(filename + "is empty.");
-            //            continue;
-            //        }
-            //        try
-            //        {
-            //            Course course = JsonSerializer.Deserialize<Course>(filedata);
-            //            if (course != null)
-            //            {
-            //                if (course.id == id)
-            //                {
-            //                    System.Console.WriteLine("Book found.....!\n" + "Code=" + course.code + "\nName=" + course.name + "\nNo. of Books=" + course.books.Count);
-            //                    return course;
-            //                }
-            //            }
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            System.Console.WriteLine(ex.ToString());
-            //            continue;
-            //        }
+
+            try
+            {
+                string[] files = Directory.GetFiles(_directory);
+                foreach (string file in files)
+                {
+                    string filedata = File.ReadAllText(file);
+                    if (String.IsNullOrEmpty(filedata))
+                    {
+                        var filename = Path.GetFileName(file);
+                        System.Console.WriteLine(filename + "is empty.");
+                        continue;
+                    }
+                    try
+                    {
+                        Book? book = null;
+                        if(!String.IsNullOrEmpty(filedata))
+                        {
+                            book = JsonSerializer.Deserialize<Book>(filedata);
+                        }
+                        
+                        if (book != null)
+                        {
+                            if (book.id == id)
+                            {
+                                System.Console.WriteLine("Book found.....!\n" + "Code=" + book.id + "\nName=" + book.name );
+                                return book;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Console.WriteLine(ex.ToString());
+                        continue;
+                    }
 
 
-            //    }
-            //    System.Console.WriteLine("Book Not Found.......!");
-            //    return null;
-            //}
-            //catch (Exception ex)
-            //{
-            //    System.Console.WriteLine(ex.Message);
-            //    return null;
-            //}
+                }
+                System.Console.WriteLine("Book Not Found.......!");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                return null;
+            }
         }
+
 
         public bool ReadBookfromfolder(string folder)
         {
@@ -71,7 +77,36 @@ namespace SetMaker.Console.Manager
 
         public bool SaveBook(Book book)
         {
-            throw new NotImplementedException();
+            
+            string filename = book.name + "_" + book.id + ".json";
+            if(_directory==null)
+            {
+                System.Console.WriteLine("Invalid Directory!");
+                System.Console.ReadKey();
+                return false;
+            }
+            string filepath = Path.Combine(_directory, filename);
+            try
+            {
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                using (FileStream fs = File.Create(filepath))
+                {
+                    string json = JsonSerializer.Serialize(book);
+                    byte[] data = new UTF8Encoding().GetBytes(json);
+
+                    fs.Write(data, 0, data.Length);
+                    System.Console.WriteLine("Saved to: \n" + filepath);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
     }
 }
