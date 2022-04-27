@@ -11,5 +11,6 @@ namespace SetMaker.Console.Reader
     {
         ICollection<Question>? ReadQuestionsfromfile(string filepath);
         IDictionary<int, string>? ReadCorrectOptionsfromfile(string filepath);
+        ICollection<Question>? AssignCorrectOptiontoQuestions(ICollection<Question>? questions, IDictionary<int, string> correctOptions);
     }
 }

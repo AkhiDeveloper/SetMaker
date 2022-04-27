@@ -10,6 +10,30 @@ namespace SetMaker.Console.Reader
 {
     public class QuestionReader : IQuestionReader
     {
+        public ICollection<Question>? AssignCorrectOptiontoQuestions(ICollection<Question>? questions, IDictionary<int, string> correctOptions)
+        {
+            if (questions != null || correctOptions != null)
+            {
+                foreach (Question question in questions)
+                {
+                    foreach (var correctoption in correctOptions)
+                    {
+                        if (question.questionnumber == correctoption.Key)
+                        {
+                            foreach (var option in question.options)
+                            {
+                                if (option.key == correctoption.Value)
+                                {
+                                    option.isCorrect = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return questions;
+        }
+
         public IDictionary<int, string> ReadCorrectOptionsfromfile(string filepath)
         {
             IDictionary<int, string> correctoptions = new Dictionary<int, string>();

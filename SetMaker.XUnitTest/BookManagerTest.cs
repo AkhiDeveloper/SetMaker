@@ -41,5 +41,37 @@ namespace SetMaker.XUnitTest
             Assert.Equal(expectedbook.name, actualbook.name);
             Assert.Equal(expectedbook.subjects.First().name, actualbook.subjects.First().name);
         }
+
+        [Fact]
+        public void ReadBookfromfolder_checksubjects()
+        {
+            //Arrange
+            string folder = @"G:\My Drive\Backup\Aanlyzed\Test Courses\Course-01_code01\Bookname01_Bookcode01";
+            int expectedsubjets = 2;
+
+            //Act
+            IBookManager bookManager = new BookManager();
+            var actualbook=bookManager.ReadBookfromfolder(folder);
+
+            //Assert
+            Assert.Equal(expectedsubjets, actualbook.subjects.Count());
+
+        }
+
+        [Fact]
+        public void ReadBookfromfolder_checkfirstsubjectproperty()
+        {
+            //Arrange
+            string folder = @"G:\My Drive\Backup\Aanlyzed\Test Courses\Course-01_code01\Bookname01_Bookcode01";
+            Subject expectedsubject = new Subject() { id= "Bookcode01@sub01", name="Subject 01"};
+
+            //Act
+            IBookManager bookManager = new BookManager();
+            var actualbook = bookManager.ReadBookfromfolder(folder);
+
+            //Assert
+            Assert.Equal(expectedsubject.id, actualbook.subjects.First().id);
+            Assert.Equal(expectedsubject.name, actualbook.subjects.First().name);
+        }
     }
 }

@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace SetMaker.Console.Manager
 {
-    public interface IBookManager
+    public interface ICourseManager
     {
-        bool SaveBook(Book book);
-        Book? GetBook(string id);
-        Book? ReadBookfromfolder(string folder);
+        bool Savecourse(Course course);
+        Course GetCourse(string id);
     }
 }

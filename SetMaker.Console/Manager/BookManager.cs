@@ -70,9 +70,80 @@ namespace SetMaker.Console.Manager
         }
 
 
-        public bool ReadBookfromfolder(string folder)
+        public Book? ReadBookfromfolder(string folder)
         {
-            throw new NotImplementedException();
+            if (!Directory.Exists(folder))
+            {
+                return null;
+            }
+
+            //book naming convention Bookname_Bookcode
+            //get detail of book from folder name
+            var bookfilename = Path.GetFileName(folder);
+            var bookelements = bookfilename.Split('_');
+            var bookname = bookelements[0].Trim();
+            var bookcode = bookelements[1].Trim();
+            Book result = new Book() { id=bookcode, name=bookname };
+
+            //get subject sub directives of book folder
+            var subjectfolders = Directory.GetDirectories(folder);
+            foreach (var subjectfolder in subjectfolders)
+            {
+
+                //naming convention "SubjectSN_SubjectName_SubjectCode"
+                var filename = Path.GetFileName(subjectfolder);
+                var elemnts = filename.Split('_');
+                var subjectSn = elemnts[0].Trim();
+                var subjectName = elemnts[1].Trim();
+                var subjectCode = bookcode + "@" + elemnts[2].Trim();
+                if (subjectCode == null) continue;
+                Subject subject = new Subject() { id=subjectCode, name=subjectName};
+
+                //getting question and correct option files 
+                //Adding questions to subject
+                Reader.IQuestionReader questionReader = new Reader.QuestionReader();
+                ICollection<Question>? readedquestions = null;
+                IDictionary<int, string>? readcorrectoptions = null;
+                var files = Directory.GetFiles(subjectfolder);
+                foreach (var file in files)
+                {
+                    filename = Path.GetFileNameWithoutExtension(file).Trim();
+                    var check = filename.EndsWith("Q");
+                    //file name ending with Q is question and A is correct option
+                    if (filename.EndsWith("Q") && readedquestions == null)
+                    {
+                        //read question  file
+
+                        
+                            readedquestions = questionReader.ReadQuestionsfromfile(file);
+                            continue;
+                        
+                    }
+                    if (filename.EndsWith("A") && readcorrectoptions == null)
+                    {
+                        //read correct option  file
+                        
+                            readcorrectoptions = questionReader.ReadCorrectOptionsfromfile(file);
+                            continue;
+                        
+                    }
+                }
+                //Assign correct option to question read
+                if (readedquestions != null && readcorrectoptions != null)
+                {
+                    readedquestions = questionReader.AssignCorrectOptiontoQuestions(readedquestions, readcorrectoptions);
+                }
+
+
+                //Add Questions to subject
+                foreach(Question question in readedquestions)
+                {
+                    subject.questions.Add(question);
+                }
+                
+                result.subjects.Add(subject);
+            }
+            return result;
         }
 
         public bool SaveBook(Book book)
