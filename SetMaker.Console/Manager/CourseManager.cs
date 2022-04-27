@@ -68,9 +68,37 @@ namespace SetMaker.Console.Manager
             }
         }
 
-        public bool Savecourse(Course course)
+        public bool SaveCourse(Course course)
         {
-            throw new NotImplementedException();
+            string filename = course.name + "_" + course.id + ".json";
+            if (_directory == null)
+            {
+                System.Console.WriteLine("Invalid Directory!");
+                System.Console.ReadKey();
+                return false;
+            }
+            string filepath = Path.Combine(_directory, filename);
+            try
+            {
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                using (FileStream fs = File.Create(filepath))
+                {
+                    string json = JsonSerializer.Serialize(course);
+                    byte[] data = new UTF8Encoding().GetBytes(json);
+
+                    fs.Write(data, 0, data.Length);
+                    System.Console.WriteLine("Saved to: \n" + filepath);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
     }
 }

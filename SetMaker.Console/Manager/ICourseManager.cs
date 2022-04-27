@@ -9,7 +9,7 @@ namespace SetMaker.Console.Manager
 {
     public interface ICourseManager
     {
-        bool Savecourse(Course course);
+        bool SaveCourse(Course course);
         Course GetCourse(string id);
     }
 }
