@@ -68,6 +68,21 @@ namespace SetMaker.Console.Manager
             }
         }
 
+        public IList<Question> GetQuestions(string courseid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Question> GetQuestions(string courseid, string subjectid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<string> GetSubjectsId(string courseid)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool SaveCourse(Course course)
         {
             string filename = course.name + "_" + course.id + ".json";

@@ -93,11 +93,11 @@ namespace SetMaker.Console.Manager
                 //naming convention "SubjectSN_SubjectName_SubjectCode"
                 var filename = Path.GetFileName(subjectfolder);
                 var elemnts = filename.Split('_');
-                var subjectSn = elemnts[0].Trim();
+                var subjectSn = int.Parse(elemnts[0].Trim());
                 var subjectName = elemnts[1].Trim();
                 var subjectCode = bookcode + "@" + elemnts[2].Trim();
                 if (subjectCode == null) continue;
-                Subject subject = new Subject() { id=subjectCode, name=subjectName};
+                Subject subject = new Subject() { sn=subjectSn,id=subjectCode, name=subjectName};
 
                 //getting question and correct option files 
                 //Adding questions to subject

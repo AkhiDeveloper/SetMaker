@@ -15,7 +15,8 @@
             get { return _id.ToLower(); }
             set { _id = value.ToLower(); }
         }
-        
+
+        public int sn { get; set; }
         public string name { get; set; }
         public IList<Question> questions { get; set; }
     }
