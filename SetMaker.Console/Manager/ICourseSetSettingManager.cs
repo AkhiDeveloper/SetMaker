@@ -9,7 +9,7 @@ namespace SetMaker.Console.Manager
 {
     public interface ICourseSetSettingManager
     {
-        bool CreateSetSetting(string courseid, CourseSetSetting setting);
+        bool SaveSetSetting(string courseid, CourseSetSetting setting);
         CourseSetSetting? GetCourseSetSetting(string courseid); 
     }
 }

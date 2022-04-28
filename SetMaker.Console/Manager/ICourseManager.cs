@@ -10,9 +10,9 @@ namespace SetMaker.Console.Manager
     public interface ICourseManager
     {
         bool SaveCourse(Course course);
-        Course GetCourse(string id);
-        IList<string> GetSubjectsId(string courseid);
-        IList<Question> GetQuestions(string courseid);
-        IList<Question> GetQuestions(string courseid, string subjectid);
+        Course? GetCourse(string id);
+        IList<string>? GetSubjectsId(string courseid);
+        IList<Question>? GetQuestions(string courseid);
+        IList<Question>? GetQuestions(string courseid, string subjectid);
     }
 }

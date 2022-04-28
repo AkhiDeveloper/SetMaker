@@ -19,7 +19,7 @@ namespace SetMaker.Console.Manager
                 Directory.CreateDirectory(_directory);
             }
         }
-        public Course GetCourse(string id)
+        public Course? GetCourse(string id)
         {
             try
             {
@@ -68,19 +68,76 @@ namespace SetMaker.Console.Manager
             }
         }
 
-        public IList<Question> GetQuestions(string courseid)
+        public IList<Question>? GetQuestions(string courseid)
         {
-            throw new NotImplementedException();
+            Course course = GetCourse(courseid);
+            if (course == null)
+            {
+                return null;
+            }
+            IList<Question>? result = new List<Question>();
+            foreach(var book in course.books)
+            {
+                if(book== null)
+                {
+                    continue;
+                }
+                foreach(var subject in book.subjects)
+                {
+                    if (subject == null) continue;
+                    foreach(var question in subject.questions)
+                    {
+                        result.Add(question);
+                    }
+                }
+            }
+            return result;
         }
 
-        public IList<Question> GetQuestions(string courseid, string subjectid)
+        public IList<Question>? GetQuestions(string courseid, string subjectid)
         {
-            throw new NotImplementedException();
+            Course? course= GetCourse(courseid);
+            if(course == null)
+            {
+                return null;
+            }
+            IList<Question> result= new List<Question>();
+            foreach(var book in course.books)
+            {
+                if (book == null) continue;
+                foreach(var subject in book.subjects)
+                {
+                    if(subject == null) continue;
+                    if(subject.id == subjectid)
+                    {
+                        foreach(var question in subject.questions)
+                        {
+                            result.Add(question);
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
-        public IList<string> GetSubjectsId(string courseid)
+        public IList<string>? GetSubjectsId(string courseid)
         {
-            throw new NotImplementedException();
+            Course? course= GetCourse(courseid);
+            if(course == null) return null;
+            IList<string> result= new List<string>();   
+            foreach(var book in course.books)
+            {
+                if(book == null) continue;
+                foreach(var subject in book.subjects)
+                {
+                    if(subject==null) continue;
+                    if (!result.Any(x => x.Equals(subject.id)))
+                    {
+                        result.Add(subject.id);
+                    }
+                }
+            }
+            return result;
         }
 
         public bool SaveCourse(Course course)
