@@ -235,7 +235,7 @@ namespace SetMaker.Console.Manager
             int count = 0;
             foreach (QuestionSet examset in practicequestionsets)
             {
-                if (_SaveSubjectPracticeSet(course, examset))
+                if (_SaveSubjectPracticeSet(course,subjectid, examset))
                 {
                     count++;
                 }

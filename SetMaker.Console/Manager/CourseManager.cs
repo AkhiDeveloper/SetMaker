@@ -120,6 +120,27 @@ namespace SetMaker.Console.Manager
             return result;
         }
 
+        public IDictionary<string, string> GetSubjectIdandNamePairs(string courseid)
+        {
+            Course? course = GetCourse(courseid);
+            if (course == null) return null;
+            IDictionary<string, string> result = new Dictionary<string, string>();
+            foreach (var book in course.books)
+            {
+                if (book == null) continue;
+                foreach (var subject in book.subjects)
+                {
+                    if (subject == null) continue;
+                    if (!result.Any(x => x.Equals(subject.id)))
+                    {
+
+                        result.Add(subject.id, subject.name);
+                    }
+                }
+            }
+            return result;
+        }
+
         public IList<string>? GetSubjectsId(string courseid)
         {
             Course? course= GetCourse(courseid);

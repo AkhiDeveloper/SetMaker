@@ -12,7 +12,7 @@ namespace SetMaker.Console.Manager
         : ICourseSetSettingManager
     {
         private string _directory;
-        private ICourseSetManager _courseManager;
+        private ICourseManager _courseManager;
 
         public CourseSetSettingManager(CourseManager courseManager)
         {
