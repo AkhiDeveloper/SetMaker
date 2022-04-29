@@ -20,7 +20,7 @@ namespace SetMaker.XUnitTest
             string expectedcoursecode = course.id;
 
             //Act
-            ICourseManager courseManager = new CourseManager();
+            ICourseSetManager courseManager = new CourseManager();
 
             //Arrange
             Assert.True(courseManager.SaveCourse(course));
@@ -34,7 +34,7 @@ namespace SetMaker.XUnitTest
             expectedcourse.books.Add(new Book() { id = "Book01", name = "Book" });
 
             //Act
-            ICourseManager courseManager = new CourseManager();
+            ICourseSetManager courseManager = new CourseManager();
             Course actualcourse = courseManager.GetCourse(expectedcourse.id);
             //Arrange
             Assert.Equal(expectedcourse.id, actualcourse.id);

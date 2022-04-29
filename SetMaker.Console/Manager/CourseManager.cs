@@ -70,7 +70,7 @@ namespace SetMaker.Console.Manager
 
         public IList<Question>? GetQuestions(string courseid)
         {
-            Course course = GetCourse(courseid);
+            Course? course = GetCourse(courseid);
             if (course == null)
             {
                 return null;
