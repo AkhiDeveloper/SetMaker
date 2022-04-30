@@ -12,7 +12,7 @@ namespace SetMaker.Console.Manager
     {
         private ICourseManager _courseManager;
 
-        public CourseSetCreator(CourseManager courseManager)
+        public CourseSetCreator(ICourseManager courseManager)
         {
             _courseManager = courseManager;
         }
@@ -24,17 +24,23 @@ namespace SetMaker.Console.Manager
             {
                 requriedquestions = totalquestions;
             }
-            for (int i = 0; i < requriedquestions; i++)
-            {
-                Random random = new Random();
-                var questionnumber = random.Next(1, totalquestions);
-                if (result.Any(x => x == questionnumber))
-                {
-                    i--;
-                    continue;
-                }
-                result.Add(questionnumber);
-            }
+            Random random = new Random();
+            result = Enumerable.Range(1, totalquestions)
+                .Select(i => new Tuple<int, int>(random.Next(totalquestions), i))
+                .OrderBy(i=>i.Item1)
+                .Select(i=>i.Item2)
+                .ToList();
+            //for (int i = 0; i < requriedquestions; i++)
+            //{
+            //    Random random = new Random();
+            //    var questionnumber = random.Next(1, totalquestions);
+            //    if (result.Any(x => x == questionnumber))
+            //    {
+            //        i--;
+            //        continue;
+            //    }
+            //    result.Add(questionnumber);
+            //}
             return result;
         }
 
@@ -73,13 +79,13 @@ namespace SetMaker.Console.Manager
                 return null;
             IList<Set> sets = new List<Set>();
             var questionSn = _RandomQuestionsSN(subjectquestions.Count());
-            if (subjectquestions.Count() > question_in_sets) question_in_sets = subjectquestions.Count();
+            if (subjectquestions.Count() < question_in_sets) question_in_sets = subjectquestions.Count();
             int a, b, c, d;
             a = Math.DivRem(subjectquestions.Count(), question_in_sets, out b);
             c = Math.DivRem(b, a, out d);
             int no_of_sets = a;
-            int question_in_first_set = question_in_sets + c;
-            int question_in_other_set = question_in_sets + c + d;
+            int question_in_first_set = question_in_sets + c + d;
+            int question_in_other_set = question_in_sets + c;
             int question_in_set = question_in_first_set;
             int count = 0;
             Set set = new Set()
@@ -141,15 +147,36 @@ namespace SetMaker.Console.Manager
             IList<Set> result = new List<Set>();
             if (_courseManager.GetSubjectsId(course.id) == null)
                 return null;
-            foreach (var id in _courseManager.GetSubjectsId(course.id))
+            try
             {
-                if(_CreateSubjectSets(course, subjectcode, question_in_each_set)==null)
-                    return null;
-                foreach (var set in _CreateSubjectSets(course, subjectcode, question_in_each_set))
+                foreach (var id in _courseManager.GetSubjectsId(course.id))
                 {
-                    result.Add(set);
+                    try
+                    {
+                        foreach (var set in _CreateSubjectSets(course, subjectcode, question_in_each_set))
+                        {
+                            try
+                            {
+                                result.Add(set);
+                            }
+                            catch(Exception ex)
+                            {
+                                continue;
+                            }
+                            
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
+                    }
                 }
             }
+            catch
+            {
+                //do nothing
+            }
+            
             return result;
         }
     }

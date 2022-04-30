@@ -12,7 +12,7 @@ namespace SetMaker.Console.Manager
         bool SaveCourse(Course course);
         Course? GetCourse(string id);
         IList<string>? GetSubjectsId(string courseid);
-        IDictionary<string, string> GetSubjectIdandNamePairs(string courseid);
+        IDictionary<string, string>? GetSubjectIdandNamePairs(string courseid);
         IList<Question>? GetQuestions(string courseid);
         IList<Question>? GetQuestions(string courseid, string subjectid);
         bool HasSubject(Course course, string subjectcode);

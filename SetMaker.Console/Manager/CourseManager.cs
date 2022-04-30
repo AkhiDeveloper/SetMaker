@@ -120,25 +120,41 @@ namespace SetMaker.Console.Manager
             return result;
         }
 
-        public IDictionary<string, string> GetSubjectIdandNamePairs(string courseid)
+        public IDictionary<string, string>? GetSubjectIdandNamePairs(string courseid)
         {
-            Course? course = GetCourse(courseid);
-            if (course == null) return null;
-            IDictionary<string, string> result = new Dictionary<string, string>();
-            foreach (var book in course.books)
+            try
             {
-                if (book == null) continue;
-                foreach (var subject in book.subjects)
+                Course? course = GetCourse(courseid);
+                if (course == null) return null;
+                IDictionary<string, string> result = new Dictionary<string, string>();
+                foreach (var book in course.books)
                 {
-                    if (subject == null) continue;
-                    if (!result.Any(x => x.Equals(subject.id)))
+                    if (book == null) continue;
+                    foreach (var subject in book.subjects)
                     {
+                        if (subject == null) continue;
+                        try
+                        {
+                            if (!result.Any(x => x.Key==subject.id))
+                            {
 
-                        result.Add(subject.id, subject.name);
+                                result.Add(subject.id, subject.name);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Console.WriteLine(ex);
+                        }
+                        
                     }
                 }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                return null;
+            }
+            
         }
 
         public IList<string>? GetSubjectsId(string courseid)
@@ -175,6 +191,7 @@ namespace SetMaker.Console.Manager
 
         public bool SaveCourse(Course course)
         {
+            if(course==null) return false;
             string filename = course.name + "_" + course.id + ".json";
             if (_directory == null)
             {

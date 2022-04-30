@@ -95,7 +95,7 @@ namespace SetMaker.Console.Manager
                 var elemnts = filename.Split('_');
                 var subjectSn = int.Parse(elemnts[0].Trim());
                 var subjectName = elemnts[1].Trim();
-                var subjectCode = bookcode + "@" + elemnts[2].Trim();
+                var subjectCode =  elemnts[2].Trim();
                 if (subjectCode == null) continue;
                 Subject subject = new Subject() { sn=subjectSn,id=subjectCode, name=subjectName};
 

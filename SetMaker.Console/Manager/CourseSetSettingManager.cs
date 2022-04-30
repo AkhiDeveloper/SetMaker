@@ -14,12 +14,12 @@ namespace SetMaker.Console.Manager
         private string _directory;
         private ICourseManager _courseManager;
 
-        public CourseSetSettingManager(CourseManager courseManager)
+        public CourseSetSettingManager(ICourseManager courseManager)
         {
             _directory = @"D:\Downloads\CourseSetsettings";
             if(!Directory.Exists(_directory))
             {
-
+                Directory.CreateDirectory(_directory);
             }
             _courseManager =courseManager;
         }
@@ -28,7 +28,7 @@ namespace SetMaker.Console.Manager
             var course = _courseManager.GetCourse(courseid);
             if (course == null) return false;
             if (setting == null) return false;
-            string filename = course.name + "_" + course.id;
+            string filename = course.name + "_" + course.id+".json";
             if (_directory == null)
             {
                 System.Console.WriteLine("Invalid Directory!");
@@ -66,7 +66,7 @@ namespace SetMaker.Console.Manager
                 foreach(string file in files)
                 {
                     if(file==null) continue;
-                    var items = file.Split("_");
+                    var items = Path.GetFileNameWithoutExtension(file).Split("_");
                     if (!(items.Count() == 2)) continue;
                     var name=items[0];
                     var id=items[1];
