@@ -32,17 +32,6 @@ namespace SetMaker.Console.Manager
                 .OrderBy(i=>i.Item1)
                 .Select(i=>i.Item2)
                 .ToList();
-            //for (int i = 0; i < requriedquestions; i++)
-            //{
-            //    Random random = new Random();
-            //    var questionnumber = random.Next(1, totalquestions);
-            //    if (result.Any(x => x == questionnumber))
-            //    {
-            //        i--;
-            //        continue;
-            //    }
-            //    result.Add(questionnumber);
-            //}
             return result;
         }
 
@@ -152,10 +141,11 @@ namespace SetMaker.Console.Manager
                 return null;
             try
             {
-                foreach (var id in _courseManager.GetSubjectsId(course.id))
+                if (_courseManager.GetSubjectsId(course.id).Contains(subjectcode))
                 {
                     try
                     {
+                        
                         foreach (var set in _CreateSubjectSets(course, subjectcode, question_in_each_set))
                         {
                             try
@@ -171,7 +161,7 @@ namespace SetMaker.Console.Manager
                     }
                     catch (Exception ex)
                     {
-                        continue;
+                        
                     }
                 }
             }
