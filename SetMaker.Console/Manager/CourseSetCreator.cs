@@ -11,10 +11,12 @@ namespace SetMaker.Console.Manager
         : ICourseSetsCreator
     {
         private ICourseManager _courseManager;
+        private ICourseSetManager _courseSetManager;
 
         public CourseSetCreator(ICourseManager courseManager)
         {
             _courseManager = courseManager;
+            _courseSetManager = new CourseSetManager();
         }
 
         private IList<int> _RandomQuestionsSN(int totalquestions, int? requriedquestions = null)
@@ -49,6 +51,7 @@ namespace SetMaker.Console.Manager
             Set courseSet = new Set()
             {
                 id = course.id +"@"+ DateTime.Now.Ticks.ToString(),
+                setNumber=_courseSetManager.GetAllExamSet(course.id).Count()+1,
                 topicName = course.name,
                 createdDate=DateTime.Now,
                 completionTime=setting.completionTime,

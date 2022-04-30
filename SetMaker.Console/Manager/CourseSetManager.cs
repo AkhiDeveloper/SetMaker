@@ -135,40 +135,44 @@ namespace SetMaker.Console.Manager
             }
             if (coursepath == null) return null;
             folders = Directory.GetDirectories(coursepath);
-            if(folders.Any(x=>x.Equals(_examsetfoldername)))
+            foreach(var folder in folders)
             {
-                var examsetfolder = folders.Single(x => x.Equals(_examsetfoldername));
-                if(examsetfolder != null)
+                if(Path.GetFileName(folder).Equals(_examsetfoldername))
                 {
-                    var examsetfolderpath=Path.Combine(coursepath, examsetfolder);
-                    var setfiles=Directory.GetFiles(examsetfolderpath);
-                    foreach(var setfile in setfiles)
+                    var examsetfolder = folder;
+                    if (examsetfolder != null)
                     {
-                        string filedata=File.ReadAllText(setfile);
-                        if (String.IsNullOrEmpty(filedata))
+                        var examsetfolderpath = Path.Combine(coursepath, examsetfolder);
+                        var setfiles = Directory.GetFiles(examsetfolderpath);
+                        foreach (var setfile in setfiles)
                         {
-                            var filename = Path.GetFileName(setfile);
-                            System.Console.WriteLine(filename + "is empty.");
-                            continue;
-                        }
-                        try
-                        {
-                            Set? questionset = null;
-                            if (!String.IsNullOrEmpty(filedata))
+                            string filedata = File.ReadAllText(setfile);
+                            if (String.IsNullOrEmpty(filedata))
                             {
-                                questionset = JsonSerializer.Deserialize<Set>(filedata);
+                                var filename = Path.GetFileName(setfile);
+                                System.Console.WriteLine(filename + "is empty.");
+                                continue;
                             }
-                            result.Add(questionset);
-                        }
-                        catch (Exception ex)
-                        { 
-                            System.Console.WriteLine(ex.ToString());
-                            return null;
-                        }
+                            try
+                            {
+                                Set? questionset = null;
+                                if (!String.IsNullOrEmpty(filedata))
+                                {
+                                    questionset = JsonSerializer.Deserialize<Set>(filedata);
+                                }
+                                result.Add(questionset);
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Console.WriteLine(ex.ToString());
+                                return null;
+                            }
 
+                        }
                     }
                 }
             }
+            
             return result;
         }
 

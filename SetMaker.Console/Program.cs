@@ -188,7 +188,7 @@ do
             Console.WriteLine("Enter the Completion time in minutes:");
             var completiontime=int.Parse(Console.ReadLine());
             Console.WriteLine("Enetr the negative markng in percentage:");
-            var negativemarking=int.Parse(Console.ReadLine())/100;
+            var negativemarking=decimal.Parse(Console.ReadLine())/100;
             IDictionary<string, int> subjectquestions=new Dictionary<string, int>();
             Console.WriteLine("Enetr the question to select from subjects of course");
             foreach (var subjectidandnamepair in coursemanager.GetSubjectIdandNamePairs(course.id))
