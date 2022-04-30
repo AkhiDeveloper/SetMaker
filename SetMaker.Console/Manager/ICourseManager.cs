@@ -15,5 +15,6 @@ namespace SetMaker.Console.Manager
         IDictionary<string, string> GetSubjectIdandNamePairs(string courseid);
         IList<Question>? GetQuestions(string courseid);
         IList<Question>? GetQuestions(string courseid, string subjectid);
+        bool HasSubject(Course course, string subjectcode);
     }
 }

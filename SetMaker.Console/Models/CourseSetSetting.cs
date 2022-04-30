@@ -2,12 +2,16 @@
 {
     public class CourseSetSetting
     {
+        public CourseSetSetting()
+        {
+            subjectquestions=new Dictionary<string, int>();
+        }
         /// <summary>
         /// key => subjectcode
         /// value => number of questions
         /// </summary>
-        IDictionary<string, int> subjectquestions { get; set; }
-        TimeSpan completionTime { get; set; }
-        decimal negativemarking { get; set; }
+        public IDictionary<string, int> subjectquestions { get; set; }
+        public TimeSpan? completionTime { get; set; }
+        public decimal? negativemarking { get; set; }
     }
 }

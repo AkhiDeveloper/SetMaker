@@ -25,7 +25,7 @@ namespace SetMaker.Console.Manager
             _subjectpracticesetfoldername = "Subject Practice set";
         }
 
-        private bool _SaveExamSet(Course course, QuestionSet examquestionSet)
+        private bool _SaveExamSet(Course course, Set examquestionSet)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace SetMaker.Console.Manager
                 return false;
             }
         }
-        private bool _SavePracticeSet(Course course, QuestionSet practicequestionSet)
+        private bool _SavePracticeSet(Course course, Set practicequestionSet)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace SetMaker.Console.Manager
                 return false;
             }
         }
-        private bool _SaveSubjectPracticeSet(Course course, string subjectid, QuestionSet practicequestionSet)
+        private bool _SaveSubjectPracticeSet(Course course, string subjectid, Set practicequestionSet)
         {
             try
             {
@@ -115,9 +115,9 @@ namespace SetMaker.Console.Manager
                 return false;
             }
         }
-        public IList<QuestionSet>? GetAllExamSet(string courseid)
+        public IList<Set>? GetAllExamSet(string courseid)
         {
-            IList<QuestionSet>? result = new List<QuestionSet>();
+            IList<Set>? result = new List<Set>();
             //Read filename and fileid from folder
             string? coursepath = null;
             var folders=Directory.GetDirectories(_directory);
@@ -152,10 +152,10 @@ namespace SetMaker.Console.Manager
                         }
                         try
                         {
-                            QuestionSet? questionset = null;
+                            Set? questionset = null;
                             if (!String.IsNullOrEmpty(filedata))
                             {
-                                questionset = JsonSerializer.Deserialize<QuestionSet>(filedata);
+                                questionset = JsonSerializer.Deserialize<Set>(filedata);
                             }
                             result.Add(questionset);
                         }
@@ -171,25 +171,25 @@ namespace SetMaker.Console.Manager
             return result;
         }
 
-        public IList<QuestionSet> GetAllPracticeSet(string courseid)
+        public IList<Set> GetAllPracticeSet(string courseid)
         {
             throw new NotImplementedException();
         }
 
-        public IList<QuestionSet> GetAllSubjectPracticeSet(string courseid, string subjectid)
+        public IList<Set> GetAllSubjectPracticeSet(string courseid, string subjectid)
         {
             throw new NotImplementedException();
         }
 
-        public bool SaveExamSet(Course course, QuestionSet examquestionSet)
+        public bool SaveExamSet(Course course, Set examquestionSet)
         {
             return _SaveExamSet(course, examquestionSet);
         }
 
-        public bool SaveExamSets(Course course, IList<QuestionSet> examquestionSets)
+        public bool SaveExamSets(Course course, IList<Set> examquestionSets)
         {
             int count=0;
-            foreach(QuestionSet examset in examquestionSets)
+            foreach(Set examset in examquestionSets)
             {
                 if(_SaveExamSet(course, examset))
                 {
@@ -203,15 +203,15 @@ namespace SetMaker.Console.Manager
             return false;
         }
 
-        public bool SavePracticeSet(Course course, QuestionSet practicequestionset)
+        public bool SavePracticeSet(Course course, Set practicequestionset)
         {
             return _SavePracticeSet(course, practicequestionset);
         }
 
-        public bool SavePracticeSets(Course course, IList<QuestionSet> practicequestionsets)
+        public bool SavePracticeSets(Course course, IList<Set> practicequestionsets)
         {
             int count = 0;
-            foreach (QuestionSet examset in practicequestionsets)
+            foreach (Set examset in practicequestionsets)
             {
                 if (_SavePracticeSet(course, examset))
                 {
@@ -225,15 +225,15 @@ namespace SetMaker.Console.Manager
             return false;
         }
 
-        public bool SaveSubjectPracticeSet(Course course, string subjectid, QuestionSet practicequestionset)
+        public bool SaveSubjectPracticeSet(Course course, string subjectid, Set practicequestionset)
         {
             return _SaveSubjectPracticeSet(course,subjectid, practicequestionset);
         }
 
-        public bool SaveSubjectPracticeSets(Course course, string subjectid, IList<QuestionSet> practicequestionsets)
+        public bool SaveSubjectPracticeSets(Course course, string subjectid, IList<Set> practicequestionsets)
         {
             int count = 0;
-            foreach (QuestionSet examset in practicequestionsets)
+            foreach (Set examset in practicequestionsets)
             {
                 if (_SaveSubjectPracticeSet(course,subjectid, examset))
                 {
