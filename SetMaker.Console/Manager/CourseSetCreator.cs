@@ -42,7 +42,7 @@ namespace SetMaker.Console.Manager
         {
             Set courseSet = new Set()
             {
-                id = course.id + DateTime.Now.Ticks.ToString(),
+                id = course.id +"@"+ DateTime.Now.Ticks.ToString(),
                 topicName = course.name,
                 createdDate=DateTime.Now,
                 completionTime=setting.completionTime,
@@ -82,14 +82,30 @@ namespace SetMaker.Console.Manager
             int question_in_other_set = question_in_sets + c + d;
             int question_in_set = question_in_first_set;
             int count = 0;
-            Set set = new Set();
+            Set set = new Set()
+            {
+                topicName = _courseManager.GetSubjectIdandNamePairs(course.id).Single(x => x.Key == subjectcode).Value,
+                id = course.id + "@" + subjectcode + "@" + DateTime.Now.Ticks.ToString(),
+                setNumber = sets.Count + 1,
+                createdDate = DateTime.Now,
+                completionTime = null,
+                negativeMarking = null
+            };
             foreach (var sn in questionSn)
             {
                 if (!(count < question_in_set))
                 {
                     sets.Add(set);
                     question_in_set = question_in_other_set;
-                    set = new Set();
+                    set = new Set()
+                    {
+                        topicName = _courseManager.GetSubjectIdandNamePairs(course.id).Single(x => x.Key == subjectcode).Value,
+                        id = course.id + "@" + subjectcode + "@" + DateTime.Now.Ticks.ToString(),
+                        setNumber = sets.Count + 1,
+                        createdDate = DateTime.Now,
+                        completionTime = null,
+                        negativeMarking = null
+                    };
                     count = 0;
                 }
                 set.questions.Add(subjectquestions[sn - 1]);
