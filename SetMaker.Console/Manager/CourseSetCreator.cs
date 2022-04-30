@@ -52,7 +52,9 @@ namespace SetMaker.Console.Manager
             {
                 var subjectcode = item.Key;
                 if (!_courseManager.HasSubject(course, subjectcode)) continue;
-                var subjectquestions = _courseManager.GetQuestions(course.id, subjectcode).ToArray();
+                var subjectquestions = _courseManager.GetQuestions(course.id, subjectcode);
+                if(subjectquestions == null)
+                    return courseSet;
                 int totalquestions = subjectquestions.Count();
                 IList<int> filteredQuestionsSn = _RandomQuestionsSN(totalquestions, item.Value);
                 foreach(var questionSn in filteredQuestionsSn)

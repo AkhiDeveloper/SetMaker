@@ -9,8 +9,8 @@ namespace SetMaker.Console.Manager
 {
     public interface ICourseSetsCreator
     {
-        Set CreateExamSet(Course course,CourseSetSetting setSetting);
-        IList<Set> CreatePracticeSets(Course course, int question_in_each_set);
-        IList<Set> CreateSubjectPracticeSets(Course course, string subjectcode, int question_in_each_set);
+        Set? CreateExamSet(Course course,CourseSetSetting setSetting);
+        IList<Set>? CreatePracticeSets(Course course, int question_in_each_set);
+        IList<Set>? CreateSubjectPracticeSets(Course course, string subjectcode, int question_in_each_set);
     }
 }

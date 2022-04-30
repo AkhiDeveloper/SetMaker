@@ -161,6 +161,18 @@ namespace SetMaker.Console.Manager
             return result;
         }
 
+        public bool HasSubject(Course course, string subjectcode)
+        {
+            if(course == null) return false;
+            if(subjectcode == null) return false;
+            foreach(var book in course.books)
+            {
+                if (book.subjects.Any(x => x.id == subjectcode))
+                    return true;
+            }
+            return false;
+        }
+
         public bool SaveCourse(Course course)
         {
             string filename = course.name + "_" + course.id + ".json";
