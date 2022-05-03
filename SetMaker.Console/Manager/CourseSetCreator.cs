@@ -27,11 +27,15 @@ namespace SetMaker.Console.Manager
                 requriedquestions = totalquestions;
             }
             Random random = new Random();
-            result = Enumerable.Range(1, totalquestions)
+            var randomsequence = Enumerable.Range(1, totalquestions)
                 .Select(i => new Tuple<int, int>(random.Next(totalquestions), i))
                 .OrderBy(i=>i.Item1)
                 .Select(i=>i.Item2)
                 .ToList();
+            for(int i= 0; i < requriedquestions; i++)
+            {
+                result.Add(randomsequence[i]);
+            }
             return result;
         }
 

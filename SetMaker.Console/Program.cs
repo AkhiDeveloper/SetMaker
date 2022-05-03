@@ -141,7 +141,7 @@ do
             Console.WriteLine("Exam Set is failed to save!");
             break;
         #endregion
-        #region 4. Create Exam Set of Course
+        #region 4. Create Practice Set of Course
         case "5":
             //Read course
             Console.WriteLine("Enter the course id:");
