@@ -16,5 +16,7 @@ namespace SetMaker.Console.Manager
         IList<Question>? GetQuestions(string courseid);
         IList<Question>? GetQuestions(string courseid, string subjectid);
         bool HasSubject(Course course, string subjectcode);
+        bool AddBook(Course course, Book book);
+        bool ForceAddBook(Course course, Book book);
     }
 }

@@ -19,6 +19,29 @@ namespace SetMaker.Console.Manager
                 Directory.CreateDirectory(_directory);
             }
         }
+
+        public bool AddSubject(Book book, Subject subject)
+        {
+            if(book == null || subject == null)
+            {
+                return false;
+            }
+
+            if(book.subjects.Any(x=>x.id == subject.id))
+            {
+                return false;
+            }
+
+            if(subject.sn == null)
+            {
+                var maxsn= book.subjects.Select(x=>x.sn).Max();
+                subject.sn = maxsn+1;                
+            }
+
+            book.subjects.Add(subject);
+            return true;
+        }
+
         public Book? GetBook(string id)
         {
 
@@ -136,14 +159,26 @@ namespace SetMaker.Console.Manager
 
 
                 //Add Questions to subject
+                if(readedquestions == null)
+                {
+                    AddSubject(result, subject);
+                    continue;
+                }
                 foreach(Question question in readedquestions)
                 {
                     subject.questions.Add(question);
+                    AddSubject(result, subject);
+                    continue;
                 }
                 
-                result.subjects.Add(subject);
+                
             }
             return result;
+        }
+
+        public bool RemoveSubject(Book book, string subject_id)
+        {
+            throw new NotImplementedException();
         }
 
         public bool SaveBook(Book book)

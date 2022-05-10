@@ -25,5 +25,6 @@ namespace SetMaker.Console.Models
 
         public string body { get; set; }
         public bool isCorrect { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

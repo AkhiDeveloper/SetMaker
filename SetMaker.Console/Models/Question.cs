@@ -25,6 +25,7 @@ namespace SetMaker.Console.Models
         }
 
         public string id { get; set; }
+        public string? ImageUrl { get; set; }
         public int? questionnumber { get; set; }
         public string body { get; set; }
         public IList<Option> options { get; set; }

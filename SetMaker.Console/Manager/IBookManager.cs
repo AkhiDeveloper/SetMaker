@@ -12,5 +12,7 @@ namespace SetMaker.Console.Manager
         bool SaveBook(Book book);
         Book? GetBook(string id);
         Book? ReadBookfromfolder(string folder);
+        bool AddSubject(Book book, Subject subject);
+        bool RemoveSubject(Book book, string subject_id);
     }
 }

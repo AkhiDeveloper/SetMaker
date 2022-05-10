@@ -135,7 +135,7 @@ namespace SetMaker.Console.Reader
                         var optionbody = CustomString.TrimSymbolStart(body).ToString();
                         Option option = new Option()
                         { key = body[0].ToString(),
-                            body = optionbody};
+                            body = CustomString.TrimSymbolStart(optionbody.Substring(1))};
                         if (option != null && question != null)
                         {
                             question.options.Add(option);

@@ -19,6 +19,33 @@ namespace SetMaker.Console.Manager
                 Directory.CreateDirectory(_directory);
             }
         }
+
+        private bool _HasBook(Course cousre, string bookid)
+        {
+            if(cousre == null || String.IsNullOrEmpty(bookid))
+            {
+                return false;
+            }
+            if(cousre.books.Any(x=>x.id == bookid))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool AddBook(Course course, Book book)
+        {
+            if(course == null || book == null)
+            {
+                return false;
+            }
+            if(!_HasBook(course, book.id))
+            {
+                course.books.Add(book);
+                return true;
+            }
+            return false;
+        }
+
         public Course? GetCourse(string id)
         {
             try
@@ -221,6 +248,26 @@ namespace SetMaker.Console.Manager
                 System.Console.WriteLine(ex.ToString());
                 return false;
             }
+        }
+
+        public bool ForceAddBook(Course course, Book book)
+        {
+            if(course == null || book == null) return false;
+
+            if(!_HasBook(course,book.id))
+            {
+                var existingbooks = course.books.Where(x => x.id == book.id);
+                if (existingbooks != null)
+                {
+                    foreach(Book existingbook in existingbooks)
+                    {
+                        course.books.Remove(existingbook);
+                    }
+                    
+                }
+            }
+            course.books.Add(book);
+            return true;
         }
     }
 }
