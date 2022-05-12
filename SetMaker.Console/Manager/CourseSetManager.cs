@@ -24,6 +24,22 @@ namespace SetMaker.Console.Manager
             _practicesetfoldername = "Practice Set";
             _subjectpracticesetfoldername = "Subject Practice set";
             _courseManager = new CourseManager();
+            if(!Directory.Exists(_directory))
+            {
+                Directory.CreateDirectory(_directory);
+            }
+            if(!Directory.Exists(_examsetfoldername))
+            {
+                Directory.CreateDirectory(_examsetfoldername);
+            }
+            if(!Directory.Exists(_subjectpracticesetfoldername))
+            {
+                Directory.CreateDirectory(_subjectpracticesetfoldername);
+            }
+            if(!Directory.Exists(_practicesetfoldername))
+            {
+                Directory.CreateDirectory(_practicesetfoldername);
+            }
         }
 
         private bool _SaveExamSet(Course course, Set examquestionSet)

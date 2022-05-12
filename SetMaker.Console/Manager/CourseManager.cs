@@ -137,10 +137,19 @@ namespace SetMaker.Console.Manager
                     if(subject == null) continue;
                     if(subject.id == subjectid)
                     {
-                        foreach(var question in subject.questions)
+                        try
                         {
-                            result.Add(question);
+                            foreach (var question in subject.questions)
+                            {
+                                result.Add(question);
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            System.Console.WriteLine(ex.Message);
+                            continue;
+                        }
+                        
                     }
                 }
             }

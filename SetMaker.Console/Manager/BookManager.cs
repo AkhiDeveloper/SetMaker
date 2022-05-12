@@ -127,6 +127,7 @@ namespace SetMaker.Console.Manager
                 Reader.IQuestionReader questionReader = new Reader.QuestionReader();
                 ICollection<Question>? readedquestions = null;
                 IDictionary<int, string>? readcorrectoptions = null;
+                //Reading Files from directory
                 var files = Directory.GetFiles(subjectfolder);
                 foreach (var file in files)
                 {
@@ -154,7 +155,8 @@ namespace SetMaker.Console.Manager
                 //Assign correct option to question read
                 if (readedquestions != null && readcorrectoptions != null)
                 {
-                    readedquestions = questionReader.AssignCorrectOptiontoQuestions(readedquestions, readcorrectoptions);
+                    readedquestions = questionReader
+                        .AssignCorrectOptiontoQuestions(readedquestions, readcorrectoptions);
                 }
 
 

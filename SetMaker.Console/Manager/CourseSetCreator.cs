@@ -44,7 +44,7 @@ namespace SetMaker.Console.Manager
             Set courseSet = new Set()
             {
                 id = course.id +"@"+ DateTime.Now.Ticks.ToString(),
-                setNumber=_courseSetManager.GetAllExamSet(course.id).Count()+1,
+                setNumber=_courseSetManager.GetAllExamSet(course.id)==null?1: _courseSetManager.GetAllExamSet(course.id).Count()+1,
                 topicName = course.name,
                 createdDate=DateTime.Now,
                 completionTime=setting.completionTime,

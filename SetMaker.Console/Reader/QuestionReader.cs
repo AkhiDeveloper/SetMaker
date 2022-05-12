@@ -14,6 +14,7 @@ namespace SetMaker.Console.Reader
         {
             if (questions != null || correctOptions != null)
             {
+                
                 foreach (Question question in questions)
                 {
                     foreach (var correctoption in correctOptions)
@@ -22,7 +23,7 @@ namespace SetMaker.Console.Reader
                         {
                             foreach (var option in question.options)
                             {
-                                if (option.key == correctoption.Value)
+                                if (option.key.ToLower() == correctoption.Value.ToLower())
                                 {
                                     option.isCorrect = true;
                                 }
