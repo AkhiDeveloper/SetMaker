@@ -98,6 +98,16 @@ namespace SetMaker.Console.Reader
             {
                 return null;
             }
+            IList<String> Formatedlines=new List<String>();
+            foreach(var line in lines)
+            {
+                if(String.IsNullOrEmpty(line))
+                {
+                    continue;
+                }
+                Formatedlines.Add(FormatString(line));
+            }
+            lines= Formatedlines.ToArray();
             Question? question = null;
             for (int i = 0; i < lines.Length; i++)
             {
@@ -154,8 +164,37 @@ namespace SetMaker.Console.Reader
             {
                 result.Add(question);
             }
-            
+           
             return result;
+        }
+
+        private string FormatString(string text)
+        {
+            string result_text = null;
+            bool formatter_flag = false;
+            foreach (var word in text)
+            {
+                if (word == 92)
+                {
+                    formatter_flag = true;
+                    continue;
+                }
+                if (formatter_flag == true)
+                {
+                    if (word == 110)
+                    {
+                        result_text = result_text + "\n";
+                    }
+                    if (word == 116)
+                    {
+                        result_text = result_text + "\t";
+                    }
+                    formatter_flag = false;
+                    continue;
+                }
+                result_text = result_text + word;
+            }
+            return result_text;
         }
     }
 }

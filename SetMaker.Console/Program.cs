@@ -76,6 +76,7 @@ do
                     Console.WriteLine(ex.Message);
                 }
             }
+            coursemanager.SaveCourse(course);
             break;
         #endregion
         #region 2. Add Book to Course
