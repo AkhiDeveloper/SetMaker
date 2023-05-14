@@ -114,7 +114,7 @@ namespace SetMaker.Console.Reader
 
                 int? number;
                 string body;
-                string line = CustomString.TrimSymbolStart(lines[i].Trim());
+                string line = lines[i].Trim();
                 var sucess = CustomString.TrySeperateStartNumberAndLetters(line, out number, out body);
                 if (string.IsNullOrEmpty(body))
                 {
@@ -160,7 +160,7 @@ namespace SetMaker.Console.Reader
                                 option.key = optionkey;
                                 if (string.IsNullOrEmpty(optionImageTagText))
                                 {
-                                    option.body = optionValue;
+                                    option.body = CustomString.TrimSymbolStart(optionValue);
                                 }
                                 else
                                 {

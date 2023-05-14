@@ -58,5 +58,35 @@ namespace SetMaker.XUnitTest
             Assert.Equal(expectednumber, resultnumber);
             Assert.Equal(expectedstring, resultstring);
         }
+
+
+        [Fact]
+        public void GetOpeningTag_TagNameImg()
+        {
+            //Arrange
+            string text = "<img>https://drive.google.com/file/d/1-eow7pMimtO__eU5faJTG9fIDEkb7EUK/view?usp=share_link</img>";
+            string expected = "img";
+                
+            //Act
+            string actual = text.GetOpeningTag();
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void GetTagText_TagNameImg()
+        {
+            //Arrange
+            string tagName = "img";
+            string text = "<img>https://drive.google.com/file/d/1-eow7pMimtO__eU5faJTG9fIDEkb7EUK/view?usp=share_link</img>";
+            string expected = "https://drive.google.com/file/d/1-eow7pMimtO__eU5faJTG9fIDEkb7EUK/view?usp=share_link";
+
+            //Act
+            string actual = text.GetTagText(tagName);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }

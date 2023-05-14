@@ -70,12 +70,14 @@ namespace SetMaker.Console
 
         public static string GetOpeningTag(this string text)
         {
-            string pattern = @"<\w+\b";  // regular expression pattern to match opening tag
+            string pattern = @"<([a-zA-Z]*)>";  // regular expression pattern to match opening tag
             Regex regex = new Regex(pattern);
             Match match = regex.Match(text);
             if (match.Success)
             {
-                return match.Value;
+                var withbracket = match.Value.ToString();
+                var withoutBracket = withbracket.Substring(1, withbracket.Length - 2);
+                return withoutBracket;
             }
             else
             {
