@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj": {}
+    "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj": {
+    "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
+        "projectUniqueName": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
         "projectName": "SetMaker.Console",
-        "projectPath": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.Console\\obj\\",
+        "projectPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
+        "packagesPath": "C:\\Users\\DishHome\\.nuget\\packages\\",
+        "outputPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\DishHome\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -49,7 +45,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -58,25 +55,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj": {
+    "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj",
+        "projectUniqueName": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj",
         "projectName": "SetMaker.XUnitTest",
-        "projectPath": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.XUnitTest\\obj\\",
+        "projectPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.XUnitTest\\SetMaker.XUnitTest.csproj",
+        "packagesPath": "C:\\Users\\DishHome\\.nuget\\packages\\",
+        "outputPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.XUnitTest\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\DishHome\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -90,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj": {
-                "projectPath": "D:\\Projects\\SetMaker\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj"
+              "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj": {
+                "projectPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj"
               }
             }
           }
@@ -133,7 +126,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -142,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

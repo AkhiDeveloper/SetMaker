@@ -139,33 +139,56 @@ namespace SetMaker.Console.Reader
                         continue;
                     }
                 }
-                if (sucess == false)
+                if(question != null)
                 {
-                    try
+                    if (sucess == false)
                     {
-                        var optionbody = CustomString.TrimSymbolStart(body).ToString();
-                        Option option = new Option()
-                        { key = body[0].ToString(),
-                            body = CustomString.TrimSymbolStart(optionbody.Substring(1))};
-                        if (option != null && question != null)
+                        var tag = line.GetOpeningTag();
+                        if(tag.ToLower() == "img")
                         {
-                            question.options.Add(option);
+                            question.ImageUrl = line.GetTagText("img");
                         }
-                    }
-                    catch
-                    {
+                        else
+                        {
+                            try
+                            {
+                                Option option = new Option();
+                                var optionbody = CustomString.TrimSymbolStart(body).ToString();
+                                var optionkey = optionbody[0].ToString();
+                                var optionValue = optionbody.Substring(1);
+                                var optionImageTagText = optionValue.GetTagText("img");
+                                option.key = optionkey;
+                                if (string.IsNullOrEmpty(optionImageTagText))
+                                {
+                                    option.body = optionValue;
+                                }
+                                else
+                                {
+                                    option.ImageUrl = optionImageTagText;
+                                }
+                                if (option != null && question != null)
+                                {
+                                    question.options.Add(option);
+                                }
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        
 
                     }
-
                 }
+                
 
             }
             if(question!=null)
             {
+                question.options = question.options.OrderBy(x => x.key).ToList();
                 result.Add(question);
             }
-           
-            return result;
+            return result.OrderBy(x => x.questionnumber).ToList();
         }
 
         private string FormatString(string text)

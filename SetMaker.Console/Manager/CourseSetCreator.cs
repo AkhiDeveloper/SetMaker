@@ -71,8 +71,7 @@ namespace SetMaker.Console.Manager
         {
             var subjectquestions = _courseManager.HasSubject(course, subjectcode) ?
                 _courseManager.GetQuestions(course.id, subjectcode) : null;
-            if (subjectquestions == null)
-                return null;
+            if (subjectquestions == null) return null;
             IList<Set> sets = new List<Set>();
             var questionSn = _RandomQuestionsSN(subjectquestions.Count());
             if (subjectquestions.Count() < question_in_sets) question_in_sets = subjectquestions.Count();

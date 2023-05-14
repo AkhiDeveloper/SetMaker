@@ -109,7 +109,7 @@ namespace SetMaker.Console.Manager
                 var subjectname = subjectidandnamepair.First(x => x.Key == subjectid).Value;
                 string subjectfoldername = subjectname + "_" + subjectid;
                 string coursefoldername = course.name + "_" + course.id;
-                string filename = "Set" + " " + practicequestionSet.setNumber.ToString() + ".json";
+                string filename = "Set" + " " + practicequestionSet.setNumber.ToString("D2") + ".json";
                 string setsfolderpath = Path.Combine(_directory, coursefoldername, _subjectpracticesetfoldername, subjectfoldername); 
                 if (!Directory.Exists(setsfolderpath))
                 {
@@ -123,9 +123,10 @@ namespace SetMaker.Console.Manager
                     byte[] data = new UTF8Encoding().GetBytes(json);
 
                     fs.Write(data, 0, data.Length);
-                    System.Console.WriteLine("Saved to: \n" + setsfolderpath);
+                    //System.Console.WriteLine("Saved to: \n" + setsfolderpath);
                     return true;
                 }
+
             }
             catch (Exception ex)
             {

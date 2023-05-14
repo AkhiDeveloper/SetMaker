@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SetMaker.Console
@@ -65,6 +66,36 @@ namespace SetMaker.Console
             }
             residualtext = text2;
             return isstartwithnumber;
+        }
+
+        public static string GetOpeningTag(this string text)
+        {
+            string pattern = @"<\w+\b";  // regular expression pattern to match opening tag
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(text);
+            if (match.Success)
+            {
+                return match.Value;
+            }
+            else
+            {
+                return String.Empty;  // no opening tag found
+            }
+        }
+
+        public static string GetTagText(this string htmlString, string tagName)
+        {
+            string pattern = $"<{tagName}\\b[^>]*>(.*?)</{tagName}>";  // regular expression pattern to match tag
+            Regex regex = new Regex(pattern, RegexOptions.Singleline);
+            Match match = regex.Match(htmlString);
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+            else
+            {
+                return String.Empty;  // no matching tag found
+            }
         }
     }
 }

@@ -125,55 +125,67 @@ namespace SetMaker.Console.Manager
                 //getting question and correct option files 
                 //Adding questions to subject
                 Reader.IQuestionReader questionReader = new Reader.QuestionReader();
-                ICollection<Question>? readedquestions = null;
-                IDictionary<int, string>? readcorrectoptions = null;
+                List<Question>? readedquestions = new List<Question>();
                 //Reading Files from directory
-                var files = Directory.GetFiles(subjectfolder);
-                foreach (var file in files)
+                var sets = this.GetAllSets(subjectfolder);
+                foreach ( var set in sets)
                 {
-                    filename = Path.GetFileNameWithoutExtension(file).Trim();
-                    var check = filename.EndsWith("Q");
-                    //file name ending with Q is question and A is correct option
-                    if (filename.EndsWith("Q") && readedquestions == null)
+                    var files = Directory.GetFiles(set);
+                    ICollection<Question>? setquestions = null;
+                    IDictionary<int, string>? setcorrectoptions = null;
+                    foreach (var file in files)
                     {
-                        //read question  file
-
-                        
-                            readedquestions = questionReader.ReadQuestionsfromfile(file);
+                        filename = Path.GetFileNameWithoutExtension(file).Trim();
+                        var check = filename.EndsWith("Q");
+                        //file name ending with Q is question and A is correct option
+                        if (filename.EndsWith("Q") && setquestions == null)
+                        {
+                            //read question  file
+                            setquestions = questionReader.ReadQuestionsfromfile(file);
                             continue;
+                        }
+                        if (filename.EndsWith("A") && setcorrectoptions == null)
+                        {
+                            //read correct option  file
+
+                            setcorrectoptions = questionReader.ReadCorrectOptionsfromfile(file);
+                            continue;
+
+                        }
+                        if (setquestions != null && setcorrectoptions != null) break;
                         
                     }
-                    if (filename.EndsWith("A") && readcorrectoptions == null)
+                    if (setquestions == null) continue;
+                    //Assign correct option to question read
+                    if (setcorrectoptions != null)
                     {
-                        //read correct option  file
-                        
-                            readcorrectoptions = questionReader.ReadCorrectOptionsfromfile(file);
-                            continue;
-                        
+                        setquestions = questionReader
+                            .AssignCorrectOptiontoQuestions(setquestions, setcorrectoptions);
                     }
+                    readedquestions.AddRange(setquestions);
                 }
-                //Assign correct option to question read
-                if (readedquestions != null && readcorrectoptions != null)
-                {
-                    readedquestions = questionReader
-                        .AssignCorrectOptiontoQuestions(readedquestions, readcorrectoptions);
-                }
-
-
                 //Add Questions to subject
-                if(readedquestions == null)
-                {
-                    AddSubject(result, subject);
-                    continue;
-                }
                 foreach(Question question in readedquestions)
                 {
                     subject.questions.Add(question);
-                    AddSubject(result, subject);
-                    continue;
                 }
-                
-                
+                AddSubject(result, subject);
+            }
+            return result;
+        }
+
+        public IList<string> GetAllSets(string subjectfolder)
+        {
+            List<string> result = new List<string>();  
+            var dirs = Directory.GetDirectories(subjectfolder);
+            //if its set
+            if(dirs == null || dirs.Count() < 1)
+            {
+                result.Add(subjectfolder);
+            }
+            foreach(var dir in dirs)
+            {
+                result.AddRange(GetAllSets(dir));
             }
             return result;
         }
