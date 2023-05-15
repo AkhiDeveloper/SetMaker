@@ -120,7 +120,7 @@ namespace SetMaker.Console.Reader
                 {
                     continue;
                 }
-                body = CustomString.TrimSymbolStart(body);
+                body = body.Trim();
                 if (sucess == true)
                 {
                     if (question == null)
