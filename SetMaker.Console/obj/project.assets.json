@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\DishHome\\.nuget\\packages\\": {}
+    "C:\\Users\\akhil\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
+      "projectUniqueName": "D:\\Coding\\My Project\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
       "projectName": "SetMaker.Console",
-      "projectPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
-      "packagesPath": "C:\\Users\\DishHome\\.nuget\\packages\\",
-      "outputPath": "D:\\Coding\\my projects\\CrackerProject\\SetMaker\\SetMaker.Console\\obj\\",
+      "projectPath": "D:\\Coding\\My Project\\SetMaker\\SetMaker.Console\\SetMaker.Console.csproj",
+      "packagesPath": "C:\\Users\\akhil\\.nuget\\packages\\",
+      "outputPath": "D:\\Coding\\My Project\\SetMaker\\SetMaker.Console\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DishHome\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\akhil\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
