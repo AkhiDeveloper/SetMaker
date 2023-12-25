@@ -1,2 +1,0 @@
-D:\Projects\SetMaker\SetMaker\SetMaker.Console\bin\Release\net6.0\publish\win-x86\SetMaker.Console.pdb
-D:\Projects\SetMaker\SetMaker\SetMaker.Console\bin\Release\net6.0\publish\win-x86\SetMaker.Console.exe
